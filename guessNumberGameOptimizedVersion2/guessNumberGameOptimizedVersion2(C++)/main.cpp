@@ -14,7 +14,7 @@ int read_point;
 char read_userName[10];
 bool NoFile;//If player's save file doesn't exit,init the program
 
-char path[50] = "save.dat";
+char path[50] = "save.dat";//change the path here
 class read
 {
 public:
@@ -23,7 +23,7 @@ public:
         return 0;
         }
     int point(void){
-        fscanf(fp,"\n%d",&read_point);
+        fscanf(fp,"%d\n",&read_point);
         return 0;
     }
 private:
@@ -79,6 +79,8 @@ void init(){
         write.userName();
         printf("OK,%s,",read_userName);
     }else {
+        read.userName();
+        read.point();
         printf("Welcome back %s!\n",read_userName);
         printf("Your current point is: %d\n",read_point);
     }
@@ -125,6 +127,8 @@ int guessNumberMain() {
             pointAdded = range/times;
             printf("Point added:%d\n",pointAdded);
             fp = fopen(path,"w+");
+            //erase the former point and write new points
+            write.userName();
             write.point(pointAdded);
             fclose(fp);
             guessNumberMain();
